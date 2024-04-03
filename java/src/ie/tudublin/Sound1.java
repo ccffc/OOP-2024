@@ -27,7 +27,7 @@ public class Sound1 extends PApplet {
     }
 
     float lerpedAvg = 0;
-    int countStickman = 0;
+    int countStickman = 1;
 
     @Override
     public void draw() {
@@ -84,6 +84,7 @@ public class Sound1 extends PApplet {
         }
 
         //stickman time
+        //stickman dance moves : 0 = Start pose, 1 = flex left, 2 = flex both, 3 = reset
         //arm length is half an arm ie. from shoulder to elbow and from elbow to hand
         float armLength = middleSize/6;
         float headRadius = height/14;
@@ -98,14 +99,25 @@ public class Sound1 extends PApplet {
         line(centreX, bodyStart, centreX, bodyEnd);
         //arm
         line(centreX, bodyStart, centreX + armLength, bodyStart);
-        line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
         line(centreX, bodyStart, centreX - armLength, bodyStart);
-        line(centreX + armLength, bodyStart, centreX - armLength*2, bodyStart);
-
+        //legs
         line(centreX, bodyEnd, centreX + armLength, bodyEnd + legLength);
         line(centreX, bodyEnd, centreX - armLength, bodyEnd + legLength);
 
-        System.out.println(countStickman);
+        // if(countStickman == 0){
+        //     line(centreX + armLength, bodyStart, centreX - armLength*2, bodyStart);
+        //     line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
+        // }
+        if(countStickman == 1){
+            line(centreX + armLength, bodyStart, centreX - armLength, bodyStart + armLength);
+            line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
+        }
+        // if(countStickman == 2){
+        //     line(centreX + armLength, bodyStart, centreX - armLength, bodyStart + armLength);
+        //     line(centreX + armLength, bodyStart, centreX + armLength, bodyStart + armLength);
+        //     countStickman = 0;
+        // }
+        // countStickman = countStickman + 1;
 
     }
 
