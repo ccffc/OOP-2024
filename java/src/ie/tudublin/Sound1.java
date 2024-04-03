@@ -15,7 +15,7 @@ public class Sound1 extends PApplet {
 
     @Override
     public void settings() {
-        size(800, 600);
+        size(1200, 800);
     }
 
     @Override
@@ -30,6 +30,8 @@ public class Sound1 extends PApplet {
     float y = 400;
 
     float lerpedAvg = 0;
+    
+    
 
     @Override
     public void draw() {
@@ -37,12 +39,35 @@ public class Sound1 extends PApplet {
         background(0);
         stroke(255);
         
-        for(int i = 0 ; i < b.size() ; i ++)
-        {
-            float hue = map(i, 0, b.size() , 0, 256);
-            stroke(hue, 255, 255);
-            noFill();
+        float centerX = width / 2;
+        float centerY = height / 2;
+
+        int sideSize = 300;
+        float sideSizeLeftMidX = sideSize /2;
+        float sideSizeRightMidX = width - (sideSize /2);
+
+        int middleSize = width - sideSize * 2;
+
+        float blueBeatBox = height/3;
+        
+        // for(int i = 0 ; i < b.size() ; i ++)
+        // {
+        //     float hue = map(i, 0, b.size() , 0, 256);
+        //     stroke(hue, 255, 255);
+        //     noFill();
+        // }
+
+        float sum = 0;
+        for(int i = 0; i < b.size(); i++) {
+            sum += abs(b.get(i));
         }
+        float avgAmplitude = sum / b.size();
+        
+        float circleSize = map(avgAmplitude, 0, 1, 0, min(width, height))%sideSize;
+
+
+        circle(sideSizeLeftMidX, centerY, circleSize);
+        circle(sideSizeRightMidX, centerY, circleSize);
 
     }
 
