@@ -21,7 +21,7 @@ public class Sound1 extends PApplet {
     @Override
     public void setup() {
         m = new Minim(this);
-        ap = m.loadFile("tomp3.cc - 08 PsychNerD and Marco G  More Cowbell.mp3");
+        ap = m.loadFile("BodyGroove_MixMcVersion.mp3");
         ap.play();
         b = ap.mix;
     }
