@@ -36,8 +36,7 @@ public class Sound1 extends PApplet {
         colorMode(HSB);
         background(0);
         stroke(255);
-
-        float h = height / 2;
+        
         for(int i = 0 ; i < b.size() ; i ++)
         {
             float hue = map(i, 0, b.size() , 0, 256);
@@ -45,29 +44,6 @@ public class Sound1 extends PApplet {
             noFill();
         }
 
-        float tot = 0;
-        for(int i = 0 ; i < b.size() ; i ++)
-        {
-            tot += abs(b.get(i));
-        }
-
-        float avg = tot / b.size();
-
-        lerpedAvg = lerp(lerpedAvg, avg, 0.1f);
-        
-        stroke(250, 255, 255);
-        circle(h, h, avg * h * 5);
-
-        stroke(200, 255, 255);
-        circle(h * 0.5f, h, lerpedAvg * h * 5);
-
-        circle(h, y, 50);
-        y += random(-10, 10);
-
-        lerped = lerp(lerped, y, 0.1f);
-
-        stroke(100, 255, 255);
-        circle(h + 200, lerped, 50);
     }
 
     float lerped = 0;
