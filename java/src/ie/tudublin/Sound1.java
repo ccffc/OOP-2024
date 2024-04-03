@@ -26,12 +26,8 @@ public class Sound1 extends PApplet {
         b = ap.mix;
     }
 
-
-    float y = 400;
-
     float lerpedAvg = 0;
-    
-    
+    int countStickman = 0;
 
     @Override
     public void draw() {
@@ -39,8 +35,8 @@ public class Sound1 extends PApplet {
         background(0);
         stroke(255);
         
-        float centerX = width / 2;
-        float centerY = height / 2;
+        float centreX = width / 2;
+        float centreY = height / 2;
 
         int sideSize = 300;
         float sideSizeLeftMidX = sideSize /2;
@@ -48,8 +44,8 @@ public class Sound1 extends PApplet {
 
         int middleSize = width - sideSize * 2;
 
-        float blueBeatBox = height/3;
-        
+        float blueBoxHeight = height/3;
+
         // for(int i = 0 ; i < b.size() ; i ++)
         // {
         //     float hue = map(i, 0, b.size() , 0, 256);
@@ -57,17 +53,59 @@ public class Sound1 extends PApplet {
         //     noFill();
         // }
 
+        
+
         float sum = 0;
         for(int i = 0; i < b.size(); i++) {
             sum += abs(b.get(i));
         }
         float avgAmplitude = sum / b.size();
+        System.out.println(avgAmplitude + '\n');
+
+        // if(avgAmplitude > 0.01 && avgAmplitude < 0.015){
+        //     System.out.println("true");
+        //     stroke(255);
+        //     circle(centreX, centreY, 100);
+        // }
         
-        float circleSize = map(avgAmplitude, 0, 1, 0, min(width, height))%sideSize;
+        float circleSize = map(avgAmplitude, 0, 1, 0, min(width, height));
 
+        for (int i = 0; i < 10; i++) {
+            fill(0);
+            stroke(255);
+            circle(sideSizeLeftMidX, centreY, circleSize-10*i);
+            circle(sideSizeRightMidX, centreY, circleSize-10*i);
 
-        circle(sideSizeLeftMidX, centerY, circleSize);
-        circle(sideSizeRightMidX, centerY, circleSize);
+            circle(sideSizeLeftMidX, centreY + (centreY/2), circleSize-10*i);
+            circle(sideSizeRightMidX, centreY + (centreY/2), circleSize-10*i);
+
+            circle(sideSizeLeftMidX, centreY - (centreY/2), circleSize-10*i);
+            circle(sideSizeRightMidX, centreY - (centreY/2), circleSize-10*i);
+        }
+
+        //stickman time
+        //arm length is half an arm ie. from shoulder to elbow and from elbow to hand
+        float armLength = middleSize/6;
+        float headRadius = height/14;
+        float bodyLength = armLength*2;
+        float legLength = bodyLength;
+        float bodyStart = blueBoxHeight+(2*headRadius);
+        float bodyEnd = bodyStart + bodyLength;
+
+        //head
+        circle(centreX ,blueBoxHeight+headRadius , headRadius*2);
+        //body
+        line(centreX, bodyStart, centreX, bodyEnd);
+        //arm
+        line(centreX, bodyStart, centreX + armLength, bodyStart);
+        line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
+        line(centreX, bodyStart, centreX - armLength, bodyStart);
+        line(centreX + armLength, bodyStart, centreX - armLength*2, bodyStart);
+
+        line(centreX, bodyEnd, centreX + armLength, bodyEnd + legLength);
+        line(centreX, bodyEnd, centreX - armLength, bodyEnd + legLength);
+
+        System.out.println(countStickman);
 
     }
 
