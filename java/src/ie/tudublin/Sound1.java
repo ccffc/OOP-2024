@@ -97,26 +97,29 @@ public class Sound1 extends PApplet {
         circle(centreX ,blueBoxHeight+headRadius , headRadius*2);
         //body
         line(centreX, bodyStart, centreX, bodyEnd);
-        //arm
+        //upper arm
         line(centreX, bodyStart, centreX + armLength, bodyStart);
         line(centreX, bodyStart, centreX - armLength, bodyStart);
         //legs
         line(centreX, bodyEnd, centreX + armLength, bodyEnd + legLength);
         line(centreX, bodyEnd, centreX - armLength, bodyEnd + legLength);
 
-        // if(countStickman == 0){
-        //     line(centreX + armLength, bodyStart, centreX - armLength*2, bodyStart);
-        //     line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
-        // }
-        if(countStickman == 1){
-            line(centreX + armLength, bodyStart, centreX - armLength, bodyStart + armLength);
+        countStickman = 2;
+
+        //lower arm
+        if(countStickman == 0){
+            line(centreX + armLength, bodyStart, centreX - armLength*2, bodyStart);
             line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
         }
-        // if(countStickman == 2){
-        //     line(centreX + armLength, bodyStart, centreX - armLength, bodyStart + armLength);
-        //     line(centreX + armLength, bodyStart, centreX + armLength, bodyStart + armLength);
-        //     countStickman = 0;
-        // }
+        if(countStickman == 1){
+            line(centreX - armLength, bodyStart, centreX - armLength, bodyStart - armLength);
+            line(centreX + armLength, bodyStart, centreX + armLength*2, bodyStart);
+        }
+        if(countStickman == 2){
+            line(centreX - armLength, bodyStart, centreX - armLength, bodyStart - armLength);
+            line(centreX + armLength, bodyStart, centreX + armLength, bodyStart - armLength);
+            countStickman = 0;
+        }
         // countStickman = countStickman + 1;
 
     }
